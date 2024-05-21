@@ -5,18 +5,18 @@ import java.nio.charsets.StandardCharsets
 
 class Header {
     // Header fields
-    int val1
-    byte val2
-    char val3
-    int val4
-    int val5
-    int val6
-    double val7
-    double val8
-    boolean val9
-    short val10
-    char val11
-    char val12
+    int val1        // First two bytes
+    byte val2       // 1 byte
+    char val3       // 1 byte
+    int val4        // 4 bytes
+    int val5        // 4 bytes
+    int val6        // 4 bytes
+    double val7     // 8 bytes
+    double val8     // 8 bytes
+    boolean val9    // 1 byte
+    short val10     // 2 bytes
+    char val11      // 1 byte
+    char val12      // 1 byte
 
     // Constructor
     Header (int val1, byte val2, char val3, int val4, int val5, int val6, double val7, double val8, boolean val9, short val10, char val11, char val12) {
@@ -41,9 +41,8 @@ class Header {
 }
 
 // Function to parse binary data into header object
-def parseHeader(byte[] binaryBuffer) {
-    ByteBuffer buffer = ByteBuffer.wrap(binaryBuffer)
-    buffer.position(0)
+def parseHeader(ByteBuffer binaryBuffer) {
+    ByteBuffer buffer = binaryBuffer
     
     int val1 = buffer.getShort()
     byte val2 = buffer.get()
@@ -78,7 +77,9 @@ class MsgBody {
     int val24		// 4 bytes
     int val25 		// 4 bytes, float
     int val26		// 4 bytes
-    int val27 		// 24 bytes, float, 3x 64-bit values (x, y, z)
+    int val27_x     // val27 is 3 64-bit values that have the structure x,y,z
+    int val27_y     //
+    int val27_z     //
     int val28 		// 24 bytes, float, 3x 64-bit values (x, y, z)
     int val29 		// 24 bytes, float, 3x 64-bit values (x, y, z)
     int val30 		// 180 bytes, float, 45 32-bit values (1,1), (1, 2)...
